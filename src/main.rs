@@ -1,68 +1,58 @@
 use minifb::{Key, Window, WindowOptions};
 use std::time::Duration;
-use std::time::SystemTime;
 mod framebuffer;
 mod bmp;
+mod conway;
+
+use framebuffer::Framebuffer;
+use conway::{WIDTH, HEIGHT, initialize_pulsar, initialize_oscillator, initialize_pinwheel, initialize_angel, initialize_pattern1, initialize_pattern2, initialize_pattern3, initialize_pattern4, render, update_board};
 
 fn main() {
-    let window_width = 800;
-    let window_height = 600;
+    let window_width = WIDTH * 4;
+    let window_height = HEIGHT * 4;
 
-    let framebuffer_width = 800;
-    let framebuffer_height = 600;
+    let frame_delay = Duration::from_millis(100); // Reducido para mayor velocidad
 
-    let frame_delay = Duration::from_millis(16);
-
-    let mut framebuffer = framebuffer::Framebuffer::new(framebuffer_width, framebuffer_height);
+    let mut framebuffer = Framebuffer::new(WIDTH, HEIGHT);
 
     let mut window = Window::new(
-        "Rust Graphics - Render Loop Example",
+        "Conway's Game of Life - Render Loop",
         window_width,
         window_height,
         WindowOptions::default(),
     ).unwrap();
 
-    let mut x = 1;
-    let mut speed = 1;
+    // Inicializar el tablero y los patrones iniciales
+    let mut board = vec![vec![false; HEIGHT]; WIDTH];
+    initialize_pulsar(&mut board);
+    initialize_oscillator(&mut board);
+    initialize_pinwheel(&mut board);
+    initialize_angel(&mut board);
+    initialize_pattern1(&mut board);
+    initialize_pattern2(&mut board);
+    initialize_pattern3(&mut board);
+    initialize_pattern4(&mut board);
 
     while window.is_open() {
-        // listen to inputs
+        // Escuchar entradas del teclado
         if window.is_key_down(Key::Escape) {
             break;
         }
 
-        // prepare variables for rendering
-        if x as usize == framebuffer_width {
-            speed = -1;
-        }
-        if x == 0 {
-            speed = 1;
-        }
-        x += speed;
+        // Actualizar el tablero según las reglas de Conway
+        board = update_board(&board);
 
-        // Clear the framebuffer
-        framebuffer.set_background_color(0x333355);
-        framebuffer.clear();
+        // Llamar a la función render para pintar el framebuffer
+        render(&mut framebuffer, &board);
 
-        // Draw some points
-        framebuffer.set_foreground_color(0xFFDDDD);
-        framebuffer.point(x as isize, 40);
-
-        // Update the window with the framebuffer contents
+        // Actualizar la ventana con el contenido del framebuffer
         window
             .update_with_buffer(&framebuffer.buffer.iter().map(|color| {
                 ((color.r as u32) << 16) | ((color.g as u32) << 8) | (color.b as u32)
-            }).collect::<Vec<u32>>(), framebuffer_width, framebuffer_height)
+            }).collect::<Vec<u32>>(), WIDTH, HEIGHT)
             .unwrap();
 
-        // Check for screenshot key press
-        if window.is_key_down(Key::S) {
-            let timestamp = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs();
-            let filename = format!("screenshot_{}.bmp", timestamp);
-            bmp::write_bmp_file(&filename, &framebuffer.buffer, framebuffer_width, framebuffer_height).unwrap();
-        }
-
-        // Wait a bit to maintain consistent frame rate
+        // Esperar un poco para mantener una tasa de frames constante
         std::thread::sleep(frame_delay);
     }
 }
