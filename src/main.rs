@@ -5,7 +5,7 @@ mod bmp;
 mod conway;
 
 use framebuffer::Framebuffer;
-use conway::{WIDTH, HEIGHT, initialize_pulsar, initialize_oscillator, initialize_pinwheel, initialize_angel, initialize_pattern1, initialize_pattern2, initialize_pattern3, initialize_pattern4, render, update_board};
+use conway::{WIDTH, HEIGHT, initialize_pulsar, initialize_oscillator, initialize_pinwheel, initialize_angel, initialize_pattern1, initialize_pattern2, initialize_pattern3, initialize_pattern4, initialize_beehive, initialize_loaf, initialize_boat, initialize_blinker, initialize_toad, initialize_beacon, render, update_board};
 
 fn main() {
     let window_width = WIDTH * 4;
@@ -32,6 +32,12 @@ fn main() {
     initialize_pattern2(&mut board);
     initialize_pattern3(&mut board);
     initialize_pattern4(&mut board);
+    initialize_beehive(&mut board);
+    initialize_loaf(&mut board);
+    initialize_boat(&mut board);
+    initialize_blinker(&mut board);
+    initialize_toad(&mut board);
+    initialize_beacon(&mut board);
 
     while window.is_open() {
         // Escuchar entradas del teclado

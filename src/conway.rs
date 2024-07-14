@@ -14,12 +14,13 @@ pub fn initialize_pulsar(board: &mut Vec<Vec<bool>>) {
         (4, 14), (5, 14), (6, 14), (10, 14), (11, 14), (12, 14),
     ];
 
-    let offset_x = 10;
-    let offset_y = 10;
+    let positions = [(10, 10), (50, 50)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
-        board[offset_x + dy][offset_y + dx] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+            board[offset_x + dy][offset_y + dx] = true;
+        }
     }
 }
 
@@ -29,11 +30,12 @@ pub fn initialize_oscillator(board: &mut Vec<Vec<bool>>) {
         (0, 1), (0, 2), (0, 3), (1, 2), (2, 2), (3, 2), (4, 1), (4, 2), (4, 3),
     ];
 
-    let offset_x = 60;
-    let offset_y = 10;
+    let positions = [(60, 10), (20, 30)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
@@ -45,11 +47,12 @@ pub fn initialize_pinwheel(board: &mut Vec<Vec<bool>>) {
         (12, 1), (12, 2), (12, 3), (13, 0), (13, 4), (14, 0), (14, 4), (15, 0), (15, 4), (16, 1), (16, 2), (16, 3),
     ];
 
-    let offset_x = 30;
-    let offset_y = 30;
+    let positions = [(30, 30), (70, 70)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
@@ -59,11 +62,12 @@ pub fn initialize_angel(board: &mut Vec<Vec<bool>>) {
         (1, 0), (2, 0), (3, 0), (0, 1), (2, 1), (4, 1), (1, 2), (3, 2), (2, 3), (2, 4),
     ];
 
-    let offset_x = 50;
-    let offset_y = 50;
+    let positions = [(50, 50), (10, 70)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
@@ -73,11 +77,12 @@ pub fn initialize_pattern1(board: &mut Vec<Vec<bool>>) {
         (1, 0), (2, 1), (0, 2), (1, 2), (2, 2), (3, 2), (2, 3), (4, 4), (5, 5),
     ];
 
-    let offset_x = 70;
-    let offset_y = 70;
+    let positions = [(70, 70), (20, 20)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
@@ -88,11 +93,12 @@ pub fn initialize_pattern2(board: &mut Vec<Vec<bool>>) {
         (1, 5), (2, 6), (3, 6), (4, 5), (5, 4), (6, 3), (7, 2), (6, 1), (5, 0), (4, 0), (3, 0), (2, 0), (1, 0),
     ];
 
-    let offset_x = 20;
-    let offset_y = 20;
+    let positions = [(20, 20), (80, 80)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
@@ -103,11 +109,12 @@ pub fn initialize_pattern3(board: &mut Vec<Vec<bool>>) {
         (2, 6), (3, 6), (4, 5), (5, 4), (6, 3), (7, 2), (6, 1), (5, 0), (4, 0), (3, 0), (2, 0), (1, 0),
     ];
 
-    let offset_x = 40;
-    let offset_y = 40;
+    let positions = [(40, 40), (10, 10)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
@@ -120,11 +127,102 @@ pub fn initialize_pattern4(board: &mut Vec<Vec<bool>>) {
         (17, 18), (18, 17), (19, 16), (19, 17), (19, 18),
     ];
 
-    let offset_x = 10;
-    let offset_y = 60;
+    let positions = [(10, 60), (60, 10)];
 
-    for &(dx, dy) in offsets.iter() {
-        board[offset_x + dx][offset_y + dy] = true;
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
+    }
+}
+
+// Crear el patrón Beehive
+pub fn initialize_beehive(board: &mut Vec<Vec<bool>>) {
+    let offsets = [
+        (1, 0), (2, 0), (0, 1), (3, 1), (1, 2), (2, 2),
+    ];
+
+    let positions = [(5, 5), (45, 45)];
+
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
+    }
+}
+
+// Crear el patrón Loaf
+pub fn initialize_loaf(board: &mut Vec<Vec<bool>>) {
+    let offsets = [
+        (1, 0), (2, 0), (0, 1), (3, 1), (1, 2), (3, 2), (2, 3),
+    ];
+
+    let positions = [(10, 10), (50, 50)];
+
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
+    }
+}
+
+// Crear el patrón Boat
+pub fn initialize_boat(board: &mut Vec<Vec<bool>>) {
+    let offsets = [
+        (0, 0), (1, 0), (0, 1), (2, 1), (1, 2),
+    ];
+
+    let positions = [(15, 15), (55, 55)];
+
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
+    }
+}
+
+// Crear el patrón Blinker
+pub fn initialize_blinker(board: &mut Vec<Vec<bool>>) {
+    let offsets = [
+        (0, 1), (1, 1), (2, 1),
+    ];
+
+    let positions = [(20, 20), (60, 60)];
+
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
+    }
+}
+
+// Crear el patrón Toad
+pub fn initialize_toad(board: &mut Vec<Vec<bool>>) {
+    let offsets = [
+        (1, 0), (2, 0), (3, 0), (0, 1), (1, 1), (2, 1),
+    ];
+
+    let positions = [(25, 25), (65, 65)];
+
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
+    }
+}
+
+// Crear el patrón Beacon
+pub fn initialize_beacon(board: &mut Vec<Vec<bool>>) {
+    let offsets = [
+        (0, 0), (1, 0), (0, 1), (2, 3), (3, 2), (3, 3),
+    ];
+
+    let positions = [(30, 30), (70, 70)];
+
+    for &(offset_x, offset_y) in &positions {
+        for &(dx, dy) in offsets.iter() {
+            board[offset_x + dx][offset_y + dy] = true;
+        }
     }
 }
 
