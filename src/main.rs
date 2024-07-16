@@ -11,12 +11,12 @@ fn main() {
     let window_width = WIDTH * 4;
     let window_height = HEIGHT * 4;
 
-    let frame_delay = Duration::from_millis(100); // Reducido para mayor velocidad
+    let frame_delay = Duration::from_millis(100);
 
     let mut framebuffer = Framebuffer::new(WIDTH, HEIGHT);
 
     let mut window = Window::new(
-        "Conway's Game of Life - Render Loop",
+        "Irving Acosta 22781 - Conway's Game of Life",
         window_width,
         window_height,
         WindowOptions::default(),
